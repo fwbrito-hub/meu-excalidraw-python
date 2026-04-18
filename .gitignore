@@ -1,0 +1,15 @@
+# Ambientes Virtuais Python
+venv/
+env/
+.venv/
+
+# Arquivos de Cache do Python
+__pycache__/
+*.pyc
+
+# Banco de dados local
+*.sqlite3
+*.db
+
+# Configurações sensíveis (12-Factor: Config)
+.env

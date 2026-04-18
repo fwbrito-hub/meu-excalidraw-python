@@ -1,0 +1,18 @@
+# Framework da API
+fastapi>=0.115.0
+uvicorn>=0.32.0
+
+# Framework para criação do Agente de IA
+agno>=2.5.17
+
+# INTEGRAÇÃO ESPECÍFICA GOOGLE (O que estava faltando!)
+google-generativeai>=0.8.3
+
+# Gerenciamento de Variáveis de Ambiente
+python-dotenv>=1.0.1
+
+# ORM - Versão estável para Python 3.13
+sqlalchemy>=2.0.36
+
+# Opcional para o Colab
+pyngrok>=7.1.5
