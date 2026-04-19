@@ -2,6 +2,11 @@
 
 Projeto desenvolvido seguindo os princípios de **Spec-Driven Development (SDD)** e **12-Factor App**.
 
+## 🌐 Links em Produção
+- **Frontend (Site):** [focused-spirit-production-b47a.up.railway.app](https://focused-spirit-production-b47a.up.railway.app)
+- **Backend (API Docs):** [meu-excalidraw-python-production.up.railway.app/docs](https://meu-excalidraw-python-production.up.railway.app/docs)
+
+
 ## Estrutura do Projeto
 - `docs/`: Documentação técnica e SDD.
 - `backend/`: API FastAPI e integração com Agno AI.

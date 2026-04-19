@@ -104,7 +104,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 @app.get("/")
 def status_da_base():
-    return {"status": "Operacional", "servidor": "Ligado", "banco": "SQLite Ativo", "auth": "JWT Habilitado"}
+    tipo_banco = "PostgreSQL Ativo" if "postgres" in settings.DATABASE_URL else "SQLite Ativo"
+    return {"status": "Operacional", "servidor": "Ligado", "banco": tipo_banco, "auth": "JWT Habilitado"}
 
 @app.get("/api/projetos", response_model=None)
 def listar_projetos(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
