@@ -22,4 +22,5 @@ COPY . .
 EXPOSE 8000
 
 # 7. Comando de inicialização
-CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
+# Usamos shell form para garantir que a variável $PORT do Railway seja expandida
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}

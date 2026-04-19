@@ -22,22 +22,27 @@ app = FastAPI(title=settings.APP_NAME)
 @app.on_event("startup")
 def startup_event():
     # Garantir que o usuário Admin existe para o Modo Dev
-    from app.database import SessionLocal, User
-    from app.auth import get_password_hash
-    db = SessionLocal()
     try:
-        admin = db.query(User).filter(User.username == "Admin").first()
-        if not admin:
-            new_admin = User(
-                username="Admin",
-                email="admin@excalisaas.com",
-                hashed_password=get_password_hash("admin123")
-            )
-            db.add(new_admin)
-            db.commit()
-            print("--- MODO DEV: Usuário Admin criado com sucesso ---")
-    finally:
-        db.close()
+        from app.database import SessionLocal, User
+        from app.auth import get_password_hash
+        db = SessionLocal()
+        try:
+            admin = db.query(User).filter(User.username == "Admin").first()
+            if not admin:
+                new_admin = User(
+                    username="Admin",
+                    email="admin@excalisaas.com",
+                    hashed_password=get_password_hash("admin123")
+                )
+                db.add(new_admin)
+                db.commit()
+                print("--- MODO DEV: Usuário Admin criado com sucesso ---")
+        except Exception as e:
+            print(f"Erro ao verificar/criar usuário Admin: {e}")
+        finally:
+            db.close()
+    except Exception as e:
+        print(f"Falha crítica no evento de startup: {e}")
 
 # 2. Configurando CORS
 app.add_middleware(
