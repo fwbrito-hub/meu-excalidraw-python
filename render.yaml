@@ -15,7 +15,7 @@ services:
         value: Excalidraw-Python-SaaS
 
   # --- Frontend Service (Static Site) ---
-  - type: static
+  - type: web
     name: excalidraw-frontend
     env: static
     buildCommand: npm install && npm run build
