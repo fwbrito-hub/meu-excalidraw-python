@@ -3,7 +3,6 @@ services:
   - type: web
     name: excalidraw-backend
     env: python
-    plan: free
     buildCommand: pip install -r backend/requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     rootDir: backend
@@ -19,7 +18,6 @@ services:
   - type: web
     name: excalidraw-frontend
     env: static
-    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     rootDir: frontend
