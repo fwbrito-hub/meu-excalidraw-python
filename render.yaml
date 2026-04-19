@@ -19,7 +19,7 @@ services:
     name: excalidraw-frontend
     env: static
     buildCommand: npm install && npm run build
-    publishPath: frontend/dist
+    staticPublishPath: dist
     rootDir: frontend
     envVars:
       - key: VITE_API_URL
