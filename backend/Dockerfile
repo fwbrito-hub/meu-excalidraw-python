@@ -22,5 +22,4 @@ COPY . .
 EXPOSE 8000
 
 # 7. Comando de inicialização
-# Primeiro roda as migrations, depois sobe o servidor
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
