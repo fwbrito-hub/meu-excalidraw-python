@@ -1,0 +1,29 @@
+services:
+  # --- Backend Service ---
+  - type: web
+    name: excalidraw-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Você vai colar a URL do Supabase aqui
+      - key: GOOGLE_API_KEY
+        sync: false # Sua chave do Gemini
+      - key: APP_NAME
+        value: Excalidraw-Python-SaaS
+
+  # --- Frontend Service (Static Site) ---
+  - type: static
+    name: excalidraw-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    publishPath: frontend/dist
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: excalidraw-backend
+          type: web
+          property: host

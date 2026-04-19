@@ -12,7 +12,10 @@ if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
 # 2. Criando o motor (Engine) do Banco
 connect_args = {"check_same_thread": False} if SQLALCHEMY_DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args=connect_args
+    SQLALCHEMY_DATABASE_URL, 
+    connect_args=connect_args,
+    pool_pre_ping=True,  # Verifica se a conexão está ativa antes de usar (essencial para Supabase)
+    pool_recycle=300     # Recicla conexões a cada 5 minutos
 )
 
 # 3. Sessão de Banco de Dados
