@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: excalidraw_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: excalidraw_saas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: excalidraw_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # Para usar Postgres no Docker, descomente a linha abaixo e configure o .env
+      # DATABASE_URL: postgresql://user:password@db:5432/excalidraw_saas
+      - DATABASE_URL=sqlite:///./projeto.db
+      - APP_NAME=Excalidraw_SaaS_Elite
+    volumes:
+      - ./backend:/app
+    restart: always
+
+volumes:
+  postgres_data:

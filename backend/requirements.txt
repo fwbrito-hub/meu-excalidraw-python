@@ -10,9 +10,25 @@ google-generativeai>=0.8.3
 
 # Gerenciamento de Variáveis de Ambiente
 python-dotenv>=1.0.1
+pydantic-settings>=2.6.1
+
+# Migrations
+alembic>=1.14.0
+
+# Qualidade e Testes
+pytest>=8.3.3
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+httpx>=0.27.2
 
 # ORM - Versão estável para Python 3.13
 sqlalchemy>=2.0.36
+
+# DEPENDÊNCIAS DE ESTABILIDADE E FIXES (Novas!)
+argon2-cffi>=23.1.0
+google-genai>=0.3.0
+email-validator>=2.2.0
 
 # Opcional para o Colab
 pyngrok>=7.1.5

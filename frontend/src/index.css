@@ -1,0 +1,295 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+/* ============================================
+   TOKENS DE DESIGN
+   ============================================ */
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --bg-app: #f8fafc;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --text-main: #0f172a;
+  --text-secondary: #64748b;
+  --shadow-premium: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --navbar-height: 70px;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-app);
+}
+
+/* ============================================
+   APP LAYOUT
+   A ideia é simples:
+   - Navbar ocupa 70px no topo (position: fixed)
+   - O canvas do Excalidraw começa logo abaixo (margin-top: 70px)
+   - ZERO alterações nos componentes internos do Excalidraw.
+   ============================================ */
+.App.immersive-layout {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* ============================================
+   NAVBAR PREMIUM (FLOATING ISLAND)
+   ============================================ */
+.navbar-container {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 40px);
+  max-width: 960px;
+  pointer-events: none; /* Deixa clicar no canvas por trás */
+}
+
+.floating-island {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-premium);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 10px 24px;
+  border-radius: 22px;
+  pointer-events: auto; /* A ilha em si recebe cliques */
+}
+
+/* ============================================
+   CANVAS CONTAINER
+   Empurra o Excalidraw inteiro para baixo da Navbar.
+   O Excalidraw preenche TODO o espaço restante.
+   ============================================ */
+.canvas-container {
+  position: absolute;
+  top: var(--navbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* O wrapper interno que segura o <Excalidraw /> */
+.wrapper-full {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.excalidraw-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   !! REGRA DE OURO !!
+   NÃO MEXA nos componentes internos do Excalidraw.
+   Nenhum .App-toolbar-container, .ToolIcon, .layer-ui, etc.
+   O Excalidraw cuida do próprio layout.
+   Só garantimos que ele tenha espaço para renderizar.
+   ============================================ */
+
+/* ============================================
+   COMPONENTES DA NAVBAR
+   ============================================ */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-text {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.logo-box {
+  background: var(--primary);
+  color: white;
+  padding: 7px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-box svg {
+  width: 18px;
+  height: 18px;
+}
+
+.badge {
+  font-size: 0.6rem;
+  background: #eef2ff;
+  color: var(--primary);
+  padding: 2px 7px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f0;
+  margin: 0 4px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px;
+  background: rgba(241, 245, 249, 0.8);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background: #e2e8f0;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.welcome {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.username {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  transition: color 0.2s;
+}
+
+.logout-btn:hover {
+  color: #ef4444;
+}
+
+.logout-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================
+   BOTÕES
+   ============================================ */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+}
+
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--text-main);
+  padding: 0.5rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* ============================================
+   STATUS INDICATOR
+   ============================================ */
+.status-indicator {
+  position: fixed;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 2000;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translate(-50%, -10px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
