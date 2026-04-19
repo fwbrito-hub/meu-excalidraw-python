@@ -24,6 +24,7 @@ httpx>=0.27.2
 
 # ORM - Versão estável para Python 3.13
 sqlalchemy>=2.0.36
+psycopg2-binary>=2.9.9
 
 # DEPENDÊNCIAS DE ESTABILIDADE E FIXES (Novas!)
 argon2-cffi>=23.1.0

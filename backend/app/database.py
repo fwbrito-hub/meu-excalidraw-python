@@ -8,8 +8,9 @@ from app.config import settings
 SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
 
 # 2. Criando o motor (Engine) do Banco
+connect_args = {"check_same_thread": False} if SQLALCHEMY_DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL, connect_args=connect_args
 )
 
 # 3. Sessão de Banco de Dados
